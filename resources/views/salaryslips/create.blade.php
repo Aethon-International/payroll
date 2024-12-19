@@ -34,7 +34,7 @@
               </option>
           @endforeach
         </select>
-        @error('name')
+        @error('payroll_period_id')
             <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
       </div>

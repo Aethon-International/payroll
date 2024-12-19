@@ -1,29 +1,51 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
   <div class="card mb-6">
-    <h5 class="card-header">Edit adjustmenttype</h5>
-    <form method="POST" action="{{ route('salary-slips.update', $adjustmenttype->id) }}" class="card-body">
+    <h5 class="card-header">Salary Slip Edit Form</h5>
+    <form method="POST" action="{{ route('salary-slips.update',$salaryslip->id) }} " class="card-body" id="salary-slip-form">
+    @method('PUT')
       @csrf
-      @method('PUT')
 
-       <!-- Name -->
-       <div class="mt-4">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" id="name" name="name"  value="{{ old('name', $adjustmenttype->name) }}" class="form-control"  autofocus autocomplete="name" />
-        @error('name')
-          <div class="mt-2 text-danger">{{ $message }}</div>
+      <!-- Employee -->
+      <div class="mt-4">
+          <label for="employee_id" class="form-label">Employee</label>
+          <select name="employee_id" class="form-select">
+              @foreach ($employees as $employee)
+                  <option value="{{ $employee->id }}">
+                      {{ $employee->name }}
+                  </option>
+              @endforeach
+          </select>
+          @error('name')
+              <div class="mt-2 text-danger">{{ $message }}</div>
+          @enderror
+      </div>
+
+      <!-- Payroll -->
+      <div class="mt-4">
+        <label for="payroll_period_id" class="form-label">Payroll</label>
+        <select name="payroll_period_id" class="form-select">
+          @foreach ($payrollperiods as $payrollperiod)
+              <option value="{{ $payrollperiod->id }}">
+                  {{ $payrollperiod->month." , ".$payrollperiod->year }}
+              </option>
+          @endforeach
+        </select>
+        @error('payroll_period_id')
+            <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
       </div>
 
-        <!-- Mode -->
-       <div class="mt-4">
-        <label for="mode" class="form-label">Name</label>
-        <input type="text" id="mode" name="mode"  value="{{ old('mode', $adjustmenttype->mode) }}" class="form-control"  autofocus autocomplete="mode" />
-        @error('name')
-          <div class="mt-2 text-danger">{{ $message }}</div>
-        @enderror
+
+      <!-- Initial Adjustment Fields -->
+
+      <div class="mt-4" id="adjustment-fields-container" >
+
+
       </div>
+      <button type="button" class="btn btn-success  mt-3"  id="add-adjustment-field">Add Adjustment Type +</button>
 
       <!-- Submit and Cancel -->
       <div class="pt-4">
@@ -33,6 +55,44 @@
     </form>
   </div>
 </div>
+
 @endsection
 
+
+@push('scripts')
+
+    // Add new adjustment fields when "+" is clicked
+    document.getElementById('add-adjustment-field').addEventListener('click', function() {
+        var container = document.getElementById('adjustment-fields-container');
+
+        var newAdjustmentField = `
+            <div class="mt-4 adjustment-field">
+                <label for="adjustment_type_id" class="form-label">Adjustment Type</label>
+                <select name="adjustment_type_id[]" class="form-select">
+                    @foreach ($adjustmenttypes as $adjustmenttype)
+                        <option value="{{ $adjustmenttype->id }}">
+                            {{ $adjustmenttype->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <label for="adjustment_amount" class="form-label">Adjustment Amount</label>
+                <input type="number" name="adjustment_amount[]" class="form-control" />
+
+                <button type="button" class="btn btn-danger mt-2 delete-adjustment-field">-</button>
+            </div>
+        `;
+
+        container.insertAdjacentHTML('beforeend', newAdjustmentField);
+    });
+
+    // Delete the adjustment field when the "-" button is clicked
+    document.getElementById('salary-slip-form').addEventListener('click', function(event) {
+        if (event.target.classList.contains('delete-adjustment-field')) {
+            event.target.closest('.adjustment-field').remove();
+        }
+    });
+
+
+@endpush
 

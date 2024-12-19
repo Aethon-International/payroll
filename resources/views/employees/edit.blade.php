@@ -20,7 +20,7 @@
       <div class="mt-4">
         <label for="email" class="form-label">Email</label>
         <input type="email" id="email" name="email" value="{{ old('email', $employee->email) }}" class="form-control"  autocomplete="employeename" />
-        @error('phone')
+        @error('email')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
       </div>
@@ -29,7 +29,7 @@
       <div class="mt-4">
         <label for="phone" class="form-label">Phone</label>
         <input type="phone" id="phone" name="phone" value="{{ old('phone', $employee->phone) }}" class="form-control"  autocomplete="employeename" />
-        @error('email')
+        @error('phone')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
       </div>

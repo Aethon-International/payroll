@@ -16,6 +16,7 @@ class MailController extends Controller
         // Access receiver employee
         $salary_slip = SalarySlip::findOrFail($salaryslip_id);
         $receiveremail = $salary_slip->employee->email;
+        $employee=$salary_slip->employee;
 
         // Prepare data for PDF
         $data = [
@@ -23,8 +24,12 @@ class MailController extends Controller
         ];
         $pdf = Pdf::loadView('reports.salaryinvoice', $data);
 
+        //get payroll
+
+        $payroll_period=$salary_slip->payrollPeriod;
+
         // Send email with the PDF attachment
-        Mail::to($receiveremail)->send(new SalarySlipMail($salary_slip, $pdf->output()));
+        Mail::to($receiveremail)->send(new SalarySlipMail($salary_slip, $pdf->output(), $payroll_period, $employee ));
 
         // Add success message to session
         return back()->with('success', 'Salary slip sent successfully to ' . $receiveremail);

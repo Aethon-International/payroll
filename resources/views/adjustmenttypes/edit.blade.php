@@ -19,7 +19,7 @@
        <div class="mt-4">
         <label for="mode" class="form-label">Name</label>
         <input type="text" id="mode" name="mode"  value="{{ old('mode', $adjustmenttype->mode) }}" class="form-control"  autofocus autocomplete="mode" />
-        @error('name')
+        @error('mode')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
       </div>

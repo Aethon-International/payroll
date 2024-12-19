@@ -11,15 +11,15 @@
        <div class="mt-4">
         <label for="month" class="form-label">Month</label>
         <input type="text" id="month" name="month"  value="{{ old('month', $payrollperiod->month) }}" class="form-control"  autofocus autocomplete="month" />
-        @error('name')
+        @error('month')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
       </div>
         <!-- Mode -->
        <div class="mt-4">
-        <label for="mode" class="form-label">Year</label>
-        <input type="text" id="year" name="year"  value="{{ old('modyeare', $payrollperiod->year) }}" class="form-control"  autofocus autocomplete="year" />
-        @error('name')
+        <label for="year" class="form-label">Year</label>
+        <input type="year" id="year" name="year"  value="{{ old('year', $payrollperiod->year) }}" class="form-control"  autofocus autocomplete="year" />
+        @error('year')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
       </div>

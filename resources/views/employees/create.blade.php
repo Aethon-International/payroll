@@ -19,7 +19,7 @@
       <div class="mt-4">
         <label for="email" class="form-label">Email</label>
         <input type="email" id="email" name="email" value="{{ old('email')}}" class="form-control"  autocomplete="employeename" />
-        @error('phone')
+        @error('email')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
       </div>
@@ -28,7 +28,7 @@
       <div class="mt-4">
         <label for="phone" class="form-label">Phone</label>
         <input type="phone" id="phone" name="phone" value="{{ old('phone')}}" class="form-control"  autocomplete="employeename" />
-        @error('email')
+        @error('phone')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
       </div>
@@ -45,7 +45,7 @@
         <!-- Bank -->
         <div class="mt-4">
         <label for="bank" class="form-label">Bank Name</label>
-        <input type="text" id="bank" name="bank" class="form-control"  autocomplete="new-password" />
+        <input type="text" id="bank" name="bank" value="{{ old('bank')}}" class="form-control"  autocomplete="new-password" />
         @error('bank')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
@@ -54,7 +54,7 @@
         <!-- Account No -->
         <div class="mt-4">
         <label for="accountno" class="form-label">Account #</label>
-        <input type="text" id="accountno" name="accountno" class="form-control"  autocomplete="new-password" />
+        <input type="text" id="accountno" name="accountno" value="{{ old('accountno')}}"class="form-control"  autocomplete="new-password" />
         @error('accountno')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
@@ -62,7 +62,7 @@
       <!-- Salary -->
       <div class="mt-4">
         <label for="salary" class="form-label">Salary</label>
-        <input type="text" id="salary" name="salary" class="form-control"  autocomplete="new-password" />
+        <input type="text" id="salary" name="salary" class="form-control"  value="{{ old('salary')}}" autocomplete="new-password" />
         @error('salary')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror

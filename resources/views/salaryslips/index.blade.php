@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
   <div class="card">
@@ -23,6 +22,7 @@
             <th>Action</th>
           </tr>
         </thead>
+
         <tbody class="table-border-bottom-0">
           @forelse ($salaryslips as $salaryslip)
             <tr>
@@ -35,9 +35,7 @@
               <td>
                 <span class="fw-medium">{{ $salaryslip->base_salary }}</span>
               </td>
-
-
-              <td>
+             <td>
                 <span class="fw-medium">{{ $salaryslip->fine }}</span>
               </td>
               <td>
@@ -55,14 +53,15 @@
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit"><i class="ti ti-trash me-2"></i></button>
                 </form>
-
                 <a href="{{ route('generate-pdf', ['salary_slip_id' => $salaryslip->id]) }}" class="text-white">
                   <button class="btn btn-success" type="submit">Generate PDF</button>
                 </a>
-
                 <a href="{{ route('send.salary-slip', $salaryslip->id) }}" class="text-white">
                   <button class="btn btn-success" type="submit">Send Email</button>
                 </a>
+                <a href="{{route('salary-slips.edit', $salaryslip->id)}}">
+                <button class="btn btn-warning"><i class="ti ti-edit me-2"></i></button>
+              </a>
               </td>
             </tr>
           @empty

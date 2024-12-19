@@ -10,14 +10,14 @@
       <div class="mt-4">
         <label for="month" class="form-label">Month</label>
         <input type="text" id="month" name="month" value="{{ old('month')}}" class="form-control"  autofocus autocomplete="month" />
-        @error('name')
+        @error('month')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
       </div>
 
       <div class="mt-4">
         <label for="year" class="form-label">Year</label>
-        <input type="text" id="year" name="year" value="{{ old('year')}}" class="form-control"  autofocus autocomplete="year" />
+        <input type="year" id="year" name="year" value="{{ old('year')}}" class="form-control"  autofocus autocomplete="year" />
         @error('name')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror

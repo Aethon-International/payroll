@@ -72,7 +72,7 @@
                                     value="{{ old('	phone', auth()->user()->phone) }}"
                                     placeholder="202 555 0111" />
                             </div>
-                            @error('	phone')
+                            @error('phone')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
