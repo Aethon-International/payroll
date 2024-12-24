@@ -26,10 +26,12 @@ class SalarySlipMail extends Mailable
      */
     public function __construct($salary_slip, $pdf, $payroll_period, $employee)
     {
+
         $this->salary_slip = $salary_slip;
         $this->pdf = $pdf;
         $this->payroll_period = $payroll_period;
         $this->employee = $employee;
+
     }
 
     /**
@@ -45,7 +47,7 @@ class SalarySlipMail extends Mailable
                         'payroll_period' => $this->payroll_period,
                         'employee' => $this->employee,
                     ])
-                    ->attachData($this->pdf, 'SalarySlip.pdf', [
+                    ->attachData($this->pdf, 'Aethon Salary - ' . $this->salary_slip->payrollperiod->month .' '. $this->salary_slip->payrollperiod->year .'.pdf', [
                         'mime' => 'application/pdf',
                     ])
                     ->subject('Aethon Salary - ' . $this->payroll_period->month . ' ' . $this->payroll_period->year); // Use payroll_period dynamically in the subject

@@ -13,33 +13,24 @@ class PdfController extends Controller
 {
     public function generatePdf(string $salary_slip_id)
     {
-        $salarySlip = SalarySlip::findOrFail($salary_slip_id); // Use findOrFail for better error handling
-        $data = [
-            'salary_slip' => $salarySlip
-        ];
-
-        $pdf = Pdf::loadView('reports.salaryinvoice', $data);
-        return $pdf->download('invoice.pdf');
-
         try {
-            $salarySlip = SalarySlip::findOrFail($salary_slip_id); // Use findOrFail for better error handling
-        $data = [
-            'salary_slip' => $salarySlip
-        ];
+            // Retrieve the salary slip or fail
+            $salarySlip = SalarySlip::findOrFail($salary_slip_id);
 
-        $pdf = Pdf::loadView('reports.salaryinvoice', $data);
-        return $pdf->download('invoice.pdf');
+            // Data for the view
+            $data = [
+                'salary_slip' => $salarySlip
+            ];
 
-            // Add success message to session
-            return back()->with('success', 'Salary slip sent successfully to ' . $receiveremail);
-        }
+            // Generate the PDF
+            $pdf = Pdf::loadView('reports.salaryinvoice', $data);
 
-        catch (\Exception $e) {
-            // Add error message to session
-            return back()->with('error', 'Failed to send salary slip. ' . $e->getMessage());
+            // Return the generated PDF for download
+            return $pdf->download('Aethon Salary - ' . $salarySlip->payrollperiod->month .' '. $salarySlip->payrollperiod->year .'.pdf');
+
+        } catch (\Exception $e) {
+            // Add error message to session if something goes wrong
+            return back()->with('error', 'Failed to generate salary slip PDF. ' . $e->getMessage());
         }
     }
-
-
-
 }

@@ -872,7 +872,7 @@ video {
         <footer class="fixed bottom-0 left-0 bg-slate-100 w-full text-neutral-600 text-center text-xs py-3">
           <a href="https://aethon.digital/" target="_blank">Aethon INT.</a>
           <span class="text-slate-300 px-2">|</span>
-          hello@aethon.digital
+          hr@aethon.digital
           <span class="text-slate-300 px-2">|</span>
           (053) 7533033
         </footer>

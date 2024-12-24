@@ -7,36 +7,45 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SalarySlipMail;
 use App\Models\SalarySlip;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
 
 class MailController extends Controller
 {
-    public function sendSalarySlip($salaryslip_id)
-{
-    try {
-        // Access receiver employee
-        $salary_slip = SalarySlip::findOrFail($salaryslip_id);
-        $receiveremail = $salary_slip->employee->email;
-        $employee=$salary_slip->employee;
+    public function handleBulkAction(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'salary_slip_ids' => 'required|array',
+            'salary_slip_ids.*' => 'exists:salary_slips,id',
+        ]);
 
-        // Prepare data for PDF
-        $data = [
-            'salary_slip' => $salary_slip
-        ];
-        $pdf = Pdf::loadView('reports.salaryinvoice', $data);
+        $salarySlipIds = $request->input('salary_slip_ids');
 
-        //get payroll
+        try {
+            // Eager load relationships for efficiency
+            $salarySlips = SalarySlip::with(['employee', 'payrollPeriod'])
+                ->whereIn('id', $salarySlipIds)
+                ->get();
 
-        $payroll_period=$salary_slip->payrollPeriod;
+            foreach ($salarySlips as $salarySlip) {
+                $receiverEmail = $salarySlip->employee->email;
+                $employee = $salarySlip->employee;
 
-        // Send email with the PDF attachment
-        Mail::to($receiveremail)->send(new SalarySlipMail($salary_slip, $pdf->output(), $payroll_period, $employee ));
+                $data = [
+                    'salary_slip' => $salarySlip,
+                ];
+                $pdf = Pdf::loadView('reports.salaryinvoice', $data);
+                $payroll_period = $salarySlip->payrollPeriod;
 
-        // Add success message to session
-        return back()->with('success', 'Salary slip sent successfully to ' . $receiveremail);
-    } catch (\Exception $e) {
-        // Add error message to session
-        return back()->with('error', 'Failed to send salary slip. ' . $e->getMessage());
+                // Queue email to improve performance
+                Mail::to($receiverEmail)->queue(new SalarySlipMail($salarySlip, $pdf->output(), $payroll_period, $employee));
+            }
+
+            return back()->with('success', 'Salary slips sent successfully.');
+        } catch (\Exception $e) {
+            Log::error('Failed to send salary slips: ' . $e->getMessage());
+            return back()->with('error', 'Failed to send some salary slips. Please try again.');
+        }
     }
 }
 
-}

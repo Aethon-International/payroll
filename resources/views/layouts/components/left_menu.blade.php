@@ -16,13 +16,6 @@
       </a>
     </li>
 
-    <!-- Dashboard -->
-    <li class="menu-item {{ request()->is('admin/dashboard*') ? ' active' : '' }}">
-      <a href="{{ route('admin.dashboard') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-dashboard"></i>
-        <div data-i18n="Dashboard">Dashboard</div>
-      </a>
-    </li>
 
     <!-- Employees -->
     <li class="menu-item {{ request()->is('admin/employees*') ? ' active' : '' }}">
