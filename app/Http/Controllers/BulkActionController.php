@@ -37,7 +37,7 @@ class BulkActionController extends Controller
             }
             elseif ($action === 'generate_pdf') {
                 $this->generatePdfs($salarySlips);
-                return back()->with('success', 'Slips generated successfully.');
+                return redirect('public/Salary_Slips.zip' );
             }
 
         } catch (\Exception $e) {
@@ -96,7 +96,7 @@ class BulkActionController extends Controller
             $zip->close();
 
             // Serve the ZIP file for download and delete it after sending
-            return response()->download($zipFilePath, 'Salary_Slips.zip')->deleteFileAfterSend(true);;
+
 
         } else {
             return back()->with('error', 'Failed to create ZIP file.');
