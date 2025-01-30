@@ -55,7 +55,7 @@
                   <span class="fw-medium">{{ $salaryslip->bonus }}</span>
                 </td>
                 <td>
-                  <span class="fw-medium">{{ $salaryslip->net_salary }}</span>
+                  <span class="fw-medium">{{ $salaryslip->net_salary }}</span>s
                 </td>
                 <td>
                     <a href="{{route('admin.salary-slips.edit', $salaryslip->id)}}">
