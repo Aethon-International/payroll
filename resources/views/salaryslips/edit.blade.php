@@ -4,7 +4,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
   <div class="card mb-6">
     <h5 class="card-header">Salary Slip Edit Form</h5>
-    <form method="POST" action="{{ route('salary-slips.update',$salaryslip->id) }} " class="card-body" id="salary-slip-form">
+    <form method="POST" action="{{ route('admin.salary-slips.update',$salaryslip->id) }} " class="card-body" id="salary-slip-form">
     @method('PUT')
       @csrf
 
@@ -22,6 +22,7 @@
               <div class="mt-2 text-danger">{{ $message }}</div>
           @enderror
       </div>
+
 
       <!-- Payroll -->
       <div class="mt-4">
@@ -50,7 +51,7 @@
       <!-- Submit and Cancel -->
       <div class="pt-4">
         <button type="submit" class="btn btn-primary me-4">Submit</button>
-        <a href="{{ route('salary-slips.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('admin.salary-slips.index') }}" class="btn btn-secondary">Cancel</a>
       </div>
     </form>
   </div>

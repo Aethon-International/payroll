@@ -33,7 +33,7 @@
                 <button class="btn btn-warning"><i class="ti ti-edit me-2"></i></button>
               </a>
 
-              <form method="POST" action="{{ route('payroll-periods.destroy', $payrollperiod->id) }}"  onsubmit="return confirm('Are you sure you want to delete this adjustmenttype?');" style="display:inline;">
+              <form method="POST" action="{{ route('admin.salary-slips.destroy', $payrollperiod->id) }}"  onsubmit="return confirm('Are you sure you want to delete this adjustmenttype?');" style="display:inline;">
                       @csrf
                       @method('DELETE')
                       <button class="btn btn-danger" type="submit"><i class="ti ti-trash me-2"></i></button>

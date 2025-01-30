@@ -16,10 +16,20 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         $input = [
+            'id'=>'2',
+            'name' => 'Employee',
+            'email' => 'employee@employee.com',
+            'password' => Hash::make('12345678'),
+            'phone' => '7878454512',
+            'image' => '/img/users/1.png',
+            'email_verified_at' => Carbon::now(),
+        ];
+        $employee = User::create($input);
+        $employee->assignRole('employee');
+        $input = [
             'id'=>'1',
-            'first_name' => 'Super',
-            'last_name' => 'Admin',
-            'email' => 'waqar@waqar@aethon.digital',
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
             'password' => Hash::make('12345678'),
             'phone' => '7878454512',
             'image' => '/img/users/1.png',
@@ -27,6 +37,10 @@ class AdminUserSeeder extends Seeder
         ];
 
         $user = User::create($input);
+        $user->assignRole('admin');
+
+
+
 
     }
 }

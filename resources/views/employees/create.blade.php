@@ -15,14 +15,25 @@
         @enderror
       </div>
 
+
+
       <!-- Email -->
       <div class="mt-4">
         <label for="email" class="form-label">Email</label>
-        <input type="email" id="email" name="email" value="{{ old('email')}}" class="form-control"  autocomplete="employeename" />
+        <input type="email" id="email" name="email"  class="form-control"  />
         @error('email')
           <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
       </div>
+
+        <!-- Password -->
+        <div class="mt-4">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name="password"  class="form-control"   />
+            @error('password')
+                <div class="mt-2 text-danger">{{ $message }}</div>
+            @enderror
+        </div>
 
       <!-- Phone -->
       <div class="mt-4">

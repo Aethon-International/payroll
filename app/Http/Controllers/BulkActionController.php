@@ -74,6 +74,8 @@ class BulkActionController extends Controller
 
         $zip = new ZipArchive;
 
+        //forname change to avoid replace file
+        $i=1;
         if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
             foreach ($salarySlips as $salarySlip) {
                 // Prepare data for the PDF
@@ -85,10 +87,11 @@ class BulkActionController extends Controller
                 // Create a unique filename for each PDF
                 $fileName = 'Aethon_Salary_'
                             . $salarySlip->payrollPeriod->month . '_'
-                            . $salarySlip->payrollPeriod->year . '_'
+                            . $salarySlip->payrollPeriod->year . '_'.$i
                             . $salarySlip->employee->id . '.pdf';
 
                 // Add PDF to the ZIP file
+                $i =$i+1;
                 $zip->addFromString($fileName, $pdf->output());
             }
 

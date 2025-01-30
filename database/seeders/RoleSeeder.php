@@ -14,18 +14,16 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $input = [
-            RolesEnum::SUPERADMIN,
-            RolesEnum::SITEMANAGER,
-            RolesEnum::SITEUSER,
-            RolesEnum::SITEDRIVER
-        ];
+        Role::create([
+            'name' => 'admin',
+            'guard_name' => 'web'
+        ]);
 
-        foreach ($input as $value) {
-            Role::create([
-                'name' => $value,
-                'guard_name' => 'web'
-            ]);
-        }
+
+        Role::create([
+            'name' => 'employee',
+            'guard_name' => 'web'
+        ]);
+
     }
 }

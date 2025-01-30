@@ -19,12 +19,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
         'email',
         'password',
         'phone',
         'image',
+        'name',
+        'email',
+        'accountno',
+        'bank',
+        'salary' ,
+        'address'
     ];
 
     /**
@@ -49,5 +53,10 @@ class User extends Authenticatable
             'password' => 'hashed',
             'status' => UserStatus::class, // This is fine for your UserStatus enum
         ];
+    }
+
+    public function salarySlips()
+    {
+        return $this->hasMany(SalarySlip::class,'employee_id');
     }
 }

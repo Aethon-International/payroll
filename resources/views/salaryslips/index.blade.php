@@ -4,11 +4,13 @@
   <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="mb-0">Salary Slips</h5>
-      <a href="{{ route('salary-slips.create') }}" class="btn btn-primary">
+      @role('admin')
+      <a href="{{ route('admin.salary-slips.create') }}" class="btn btn-primary">
         <i class="ti ti-plus me-1"></i> Add new Salary Slip
       </a>
+      @endrole
     </div>
-    <form method="POST" action="{{ route('salary-slips.send-bulk-action') }}" id="bulk-action-form">
+    <form method="POST" action="" id="bulk-action-form">
       @csrf
       <div class="table-responsive text-nowrap">
         <table class="table">
@@ -24,9 +26,11 @@
               <th>Days Off Amount</th>
               <th>Bonus</th>
               <th>Net Amount</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
+            @if($salaryslips)
             @forelse ($salaryslips as $salaryslip)
               <tr>
                 <td>
@@ -53,12 +57,23 @@
                 <td>
                   <span class="fw-medium">{{ $salaryslip->net_salary }}</span>
                 </td>
+                <td>
+                    <a href="{{route('admin.salary-slips.edit', $salaryslip->id)}}">
+                        <i class="ti ti-edit me-2"></i>
+                      </a>
+
+                      <a href="{{route('admin.salary-slips.destroy', $salaryslip->id)}}">
+                        <i class="ti ti-edit me-2"></i>
+                      </a>
+
+                </td>
               </tr>
             @empty
               <tr>
                 <td colspan="8" class="text-center">No salary slips found.</td>
               </tr>
             @endforelse
+            @endif
           </tbody>
         </table>
         <div class="m-5 d-flex gap-4">
@@ -72,8 +87,8 @@
 </div>
 
 <script>
-  // Select or deselect all checkboxes
-  document.getElementById('select-all').addEventListener('click', function () {
+// Select or deselect all checkboxes
+document.getElementById('select-all').addEventListener('click', function () {
     const checkboxes = document.querySelectorAll('input[name="selected_salary_slips[]"]');
     checkboxes.forEach(checkbox => {
       checkbox.checked = this.checked;

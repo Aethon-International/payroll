@@ -30,25 +30,16 @@
                     <div class="row">
                         <!-- First Name -->
                         <div class="mb-4 col-md-6">
-                            <label for="firstName" class="form-label">First Name</label>
-                            <input class="form-control @error('first_name') is-invalid @enderror" type="text"
-                                id="first_name" name="first_name"
-                                value="{{ old('firstName', auth()->user()->first_name) }}" autofocus />
+                            <label for="Name" class="form-label">Name</label>
+                            <input class="form-control @error('name') is-invalid @enderror" type="text"
+                                id="name" name="name"
+                                value="{{ old('name', auth()->user()->name) }}" autofocus />
                             @error('first_name')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
 
-                        <!-- Last Name -->
-                        <div class="mb-4 col-md-6">
-                            <label for="last_name" class="form-label">Last Name</label>
-                            <input class="form-control @error('last_name') is-invalid @enderror" type="text"
-                                name="last_name" id="last_name"
-                                value="{{ old('last_name', auth()->user()->last_name) }}" />
-                            @error('last_name')
-                                <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
-                        </div>
+
 
                         <!-- Email -->
                         <div class="mb-4 col-md-6">

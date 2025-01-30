@@ -27,8 +27,14 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $authuser=Auth::user();
+        if($authuser->hasRole('employee')){
+            return redirect()->intended(route('employee.salary-slips', absolute: false));
+        }
+        else{
+            return redirect()->intended(route('admins.index', absolute: false));
+        }
 
-        return redirect()->intended(route('admins.index', absolute: false));
     }
 
     /**

@@ -2,22 +2,16 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\RolesEnum;
 use App\UserStatus;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Http\RedirectResponse;
-use Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
         // Get all users excluding the logged-in user
-        $users = User::where('id', '!=', auth()->id())->get();
+        $users = User::Role('admin')->where('id', '!=', auth()->id())->get();
 
         return view('users.index', compact('users'));
     }
@@ -40,7 +34,10 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
 
-        User::create($request->validated());
+        $user=User::create($request->validated());
+        $user->assignRole('admin');
+        $user->image='/img/users/default.png';
+        $user->save();
         return redirect()->route('admins.index')->with('success', value: 'User created successfully.');
     }
 

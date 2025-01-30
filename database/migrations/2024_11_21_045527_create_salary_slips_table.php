@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('salary_slips', function (Blueprint $table) {
             $table->id(); // Primary key
             $table->unsignedBigInteger('employee_id')->nullable();
-            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedBigInteger('payroll_period_id')->nullable();
             $table->foreign('payroll_period_id')->references('id')->on('payroll_periods')->onDelete('cascade');

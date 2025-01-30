@@ -24,7 +24,7 @@
             <tr>
               <td>
                 <i class="ti ti-building ti-md text-primary me-4"></i>
-                <span class="fw-medium">{{ $user->first_name.' '.$user->last_name }}</span>
+                <span class="fw-medium">{{ $user->name }}</span>
               </td>
               <td>
                 {{ $user->email }}
@@ -54,11 +54,11 @@
                 <button class="btn btn-warning"><i class="ti ti-edit me-2"></i></button>
               </a>
 
-              <form method="POST" action="{{ route('admins.destroy', $user->id) }}"  onsubmit="return confirm('Are you sure you want to delete this user?');" style="display:inline;">
+                <form method="POST" action="{{ route('admins.destroy', $user->id) }}"  onsubmit="return confirm('Are you sure you want to delete this user?');" style="display:inline;">
                       @csrf
                       @method('DELETE')
                       <button class="btn btn-danger" type="submit"><i class="ti ti-trash me-2"></i></button>
-            </form>
+                </form>
 
               </td>
             </tr>

@@ -6,47 +6,55 @@
     <form method="POST" action="{{ route('admins.store') }}" class="card-body">
       @csrf
 
-<!-- Name -->
-      <div class="mt-4">
-        <label for="name" class="form-label">First Name</label>
-        <input type="text" id="first_name" name="first_name" value="{{ old('first_name')}}" class="form-control" required autofocus autocomplete="first_name" />
-        @error('first_name')
-          <div class="mt-2 text-danger">{{ $message }}</div>
-        @enderror
-      </div>
-      <div class="mt-4">
-        <label for="name" class="form-label"> Last Name</label>
-        <input type="text" id="last_name" name="last_name" value="{{ old('last_name')}}" class="form-control" required autofocus autocomplete="last_name" />
-        @error('last_name')
-          <div class="mt-2 text-danger">{{ $message }}</div>
-        @enderror
-      </div>
-      <!-- Email -->
-      <div class="mt-4">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" id="email" name="email" value="{{ old('email')}}" class="form-control" required autocomplete="username" />
-        @error('email')
-          <div class="mt-2 text-danger">{{ $message }}</div>
-        @enderror
-      </div>
+  <!-- Name -->
+  <div class="mt-4">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" id="name" name="name" value="{{ old('name')}}" class="form-control"  autofocus autocomplete="first_name" />
+    @error('name')
+      <div class="mt-2 text-danger">{{ $message }}</div>
+    @enderror
+  </div>
 
-      <!-- Password -->
-      <div class="mt-4">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" id="password" name="password" class="form-control" required autocomplete="new-password" />
-        @error('password')
-          <div class="mt-2 text-danger">{{ $message }}</div>
-        @enderror
-      </div>
 
-      <!-- Confirm Password -->
-      <div class="mt-4">
-        <label for="password_confirmation" class="form-label">Confirm Password</label>
-        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required autocomplete="new-password" />
-        @error('password_confirmation')
-          <div class="mt-2 text-danger">{{ $message }}</div>
-        @enderror
-      </div>
+
+  <!-- Email -->
+  <div class="mt-4">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" id="email" name="email"  class="form-control"  />
+    @error('email')
+      <div class="mt-2 text-danger">{{ $message }}</div>
+    @enderror
+  </div>
+
+        <!-- Password -->
+        <div class="mt-4">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name="password"  class="form-control"   />
+            @error('password')
+              <div class="mt-2 text-danger">{{ $message }}</div>
+            @enderror
+          </div>
+
+  <!-- Phone -->
+  <div class="mt-4">
+    <label for="phone" class="form-label">Phone</label>
+    <input type="phone" id="phone" name="phone" value="{{ old('phone')}}" class="form-control"  autocomplete="employeename" />
+    @error('phone')
+      <div class="mt-2 text-danger">{{ $message }}</div>
+    @enderror
+  </div>
+
+  <!-- Address -->
+  <div class="mt-4">
+    <label for="address" class="form-label">Address</label>
+    <input type="text" id="address" name="address" value="{{ old('address')}}" class="form-control"  autocomplete="employeename" />
+    @error('address')
+      <div class="mt-2 text-danger">{{ $message }}</div>
+    @enderror
+  </div>
+
+
+
 
       <!-- Submit and Cancel -->
       <div class="pt-4">

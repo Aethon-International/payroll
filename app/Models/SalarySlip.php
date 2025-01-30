@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Employee;
+use App\Models\User;
 use App\Models\PayrollPeriod;
 use App\Models\AdjustmentType;
 
@@ -17,7 +17,7 @@ class SalarySlip extends Model
 
     public function employee()
     {
-        return $this->belongsTo(Employee::class,'employee_id');
+        return $this->belongsTo(User::class,'employee_id');
     }
 
 

@@ -1,13 +1,15 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
   <div class="app-brand demo">
-    <a href="{{ route('admin.dashboard') }}" class="app-brand-link">
-      <img src="{{ asset('img/avatars/logo.png') }}" style="width: 90px; height: auto;">
-    </a>
+
+      <img src="{{ asset('img/avatars/logo.png') }}" style="width: 50px; height: auto;">
+
   </div>
 
   <div class="menu-inner-shadow"></div>
 
   <ul class="menu-inner py-1">
+
+    @role('admin')
     <!-- Admins -->
     <li class="menu-item {{ request()->is('admin/admins*') ? ' active' : '' }}">
       <a href="{{ route('admins.index') }}" class="menu-link">
@@ -15,7 +17,6 @@
         <div data-i18n="Admins">Admins</div>
       </a>
     </li>
-
 
     <!-- Employees -->
     <li class="menu-item {{ request()->is('admin/employees*') ? ' active' : '' }}">
@@ -43,10 +44,21 @@
 
     <!-- Salary Slips -->
     <li class="menu-item {{ request()->is('admin/salary-slips*') ? ' active' : '' }}">
-      <a href="{{ route('salary-slips.index') }}" class="menu-link">
+      <a href="{{ route('admin.salary-slips.index') }}" class="menu-link">
         <i class="menu-icon tf-icons ti ti-file-invoice"></i>
         <div data-i18n="Salary Slips">Salary Slips</div>
       </a>
     </li>
+    @endrole
+
+    @role('employee')
+    <!-- Salary Slips -->
+    <li class="menu-item {{ request()->is('employee/salary-slips*') ? ' active' : '' }}">
+        <a href="{{ route('employee.salary-slips') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-file-invoice"></i>
+          <div data-i18n="Salary Slips">Salary Slips</div>
+        </a>
+      </li>
+    @endrole
   </ul>
 </aside>

@@ -2,9 +2,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SalarySlip;
-use App\Models\Employee;
+use App\Models\User;
 use App\Models\PayrollPeriod;
 use App\Models\AdjustmentType;
+use Illuminate\Support\Facades\Auth;
 
 class SalarySlipController extends Controller
 {
@@ -19,17 +20,16 @@ class SalarySlipController extends Controller
     {
         $adjustmenttypes = AdjustmentType::all();
         $payrollperiods = PayrollPeriod::all();
-        $employees = Employee::all();
+        $employees = User::Role('employee')->get();
         return view('salaryslips.create', compact('employees', 'payrollperiods','adjustmenttypes'));
     }
-
 
     public function store(Request $request)
     {
     $salary_slip = new SalarySlip;
 
     // Fetch the employee and assign to the salary slip
-    $employee = Employee::find($request->employee_id);
+    $employee = User::find($request->employee_id);
     $salary_slip->employee_id = $employee->id; // Set the employee's foreign key in the salary slip
 
     // Fetch the payroll period and assign to the salary slip
@@ -47,9 +47,6 @@ class SalarySlipController extends Controller
     if ($request->has('adjustment_type_id') && $request->has('adjustment_amount')) {
         foreach ($request->adjustment_type_id as $key => $adjustment_type_id) {
             $adjustment_type = AdjustmentType::find($adjustment_type_id);
-
-            //add relation with salaryslip
-
 
             // Calculate the adjustment amount based on the type's mode (+ or -)
             $adjustment_amount = $request->adjustment_amount[$key];
@@ -83,12 +80,12 @@ class SalarySlipController extends Controller
 
 
 
-    return redirect()->route('salary-slips.index')->with('success', 'Salary Slip created successfully.');
+    return redirect()->route('admin.salary-slips.index')->with('success', 'Salary Slip created successfully.');
 }
 
     public function selectedEmployeeSalarySlips(string $employee_id)
     {
-        $employee=Employee::find($employee_id);
+        $employee=User::find($employee_id);
         $salaryslips=$employee->salarySlips;
 
         return view('salaryslips.index', compact('salaryslips'));
@@ -100,7 +97,7 @@ class SalarySlipController extends Controller
         $salaryslip = SalarySlip::find($id);
         $adjustmenttypes = AdjustmentType::all();
         $payrollperiods = PayrollPeriod::all();
-        $employees = Employee::all();
+        $employees = User::all();
         return view('salaryslips.edit', compact('employees', 'payrollperiods', 'adjustmenttypes', 'salaryslip'));
 
     }
@@ -113,7 +110,7 @@ class SalarySlipController extends Controller
     // Fetch the employee and assign to the salary slip
 
     // Fetch the employee and assign to the salary slip
-    $employee = Employee::find($request->employee_id);
+    $employee = User::find($request->employee_id);
     $salary_slip->employee_id = $employee->id; // Set the employee's foreign key in the salary slip
 
     // Fetch the payroll period and assign to the salary slip
@@ -125,8 +122,6 @@ class SalarySlipController extends Controller
 
     // Initialize net salary to base salary (default)
     $net_salary = $employee->salary;
-
-    // Loop through the adjustment types and amounts to process multiple adjustments
 
     //setting 0 value if user no t edit any field
 
@@ -169,15 +164,14 @@ class SalarySlipController extends Controller
     // Save the salary slip with all the relations
     $salary_slip->save();
 
-
-        return redirect()->route('salary-slips.index')->with('success', 'Salary Slip updated successfully!');
+        return redirect()->route('admin.salary-slips.index')->with('success', 'Salary Slip updated successfully!');
     }
 
 
-    public function destroy(string $id)
+    public function destroy($id)
     {
         SalarySlip::destroy($id);
-        return redirect()->route('salary-slips.index')->with('success', 'Salary Slip deleted successfully.');
+        return redirect()->route('admin.salary-slips.index')->with('success', 'Salary Slip deleted successfully.');
     }
 
 
@@ -188,4 +182,15 @@ class SalarySlipController extends Controller
 
         return view('salaryslips.show', compact('salaryslips'));
     }
+
+
+    public function showEmployeeSalarySlip( )
+    {
+        $user=Auth::user();
+        $salaryslips=$user->salarySlips ?? "";
+
+        return view('salaryslips.index', compact('salaryslips'));
+    }
+
+
 }

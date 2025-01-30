@@ -5,7 +5,7 @@
   <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="mb-0">Salary Slips</h5>
-      <a href="{{ route('salary-slips.create') }}" class="btn btn-primary">
+      <a href="{{ route('admin.salary-slips.create') }}" class="btn btn-primary">
         <i class="ti ti-plus me-1"></i>
       </a>
     </div>
@@ -43,7 +43,7 @@
                 <span class="fw-medium">{{ $salaryslip->net_salary }}</span>
               </td>
               <td>
-                <form method="POST" action="{{ route('salary-slips.destroy', $salaryslip->id) }}" onsubmit="return confirm('Are you sure you want to delete this adjustmenttype?');" style="display:inline;">
+                <form method="POST" action="{{ route('admin.salary-slips.destroy', $salaryslip->id) }}" onsubmit="return confirm('Are you sure you want to delete this adjustmenttype?');" style="display:inline;">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit"><i class="ti ti-trash me-2"></i></button>

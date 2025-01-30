@@ -4,7 +4,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
   <div class="card mb-6">
     <h5 class="card-header">Salary Slip Generation Form</h5>
-    <form method="POST" action="{{ route('salary-slips.store') }} " class="card-body" id="salary-slip-form">
+    <form method="POST" action="{{ route('admin.salary-slips.store') }} " class="card-body" id="salary-slip-form">
       @csrf
 
 
@@ -67,7 +67,7 @@
       <!-- Submit and Cancel -->
       <div class="pt-4">
         <button type="submit" class="btn btn-primary me-4">Submit</button>
-        <a href="{{ route('salary-slips.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('admin.salary-slips.index') }}" class="btn btn-secondary">Cancel</a>
       </div>
     </form>
   </div>
