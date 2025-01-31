@@ -83,6 +83,6 @@ Route::middleware(['auth', 'useractive'])->group(function () {
 
 
  // PDF generation route
-//  Route::get('generate-pdf/{salary_slip_id}', [PdfController::class, 'generatePdf'])->name('generate-pdf');
+ Route::get('generate-pdf/{salary_slip_id}', [PdfController::class, 'generatePdf'])->name('generate-pdf');
  require __DIR__.'/auth.php';
 
