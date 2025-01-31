@@ -56,7 +56,7 @@ Route::delete('payroll-periods/{payroll_period}', [PayrollPeriodController::clas
     Route::get('delete/salary-slips/{salary_slip}', [SalarySlipController::class, 'destroy'])->name('admin.salary-slips.destroy');
 
     // Bulk action route for salary slips
-    // Route::post('/salaryslips/bulk-action', [BulkActionController::class, 'handleBulkAction'])->name('salaryslips.send-bulk-action');
+    Route::post('/salaryslips/bulk-action', [BulkActionController::class, 'handleBulkAction'])->name('salaryslips.send-bulk-action');
 
     // Admin user management
     Route::resource('admins', UserController::class);
@@ -83,7 +83,6 @@ Route::middleware(['auth', 'useractive'])->group(function () {
 
 
  // PDF generation route
- Route::get('generate-pdf/{salary_slip_id}', [PdfController::class, 'generatePdf'])->name('generate-pdf');
+//  Route::get('generate-pdf/{salary_slip_id}', [PdfController::class, 'generatePdf'])->name('generate-pdf');
  require __DIR__.'/auth.php';
 
- Route::get('deletess', [SalarySlipController::class, 'delete'])->name('deletess');

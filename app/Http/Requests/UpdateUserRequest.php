@@ -23,8 +23,8 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['string', 'max:255'],
-            'email' => [ 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['string', 'min:8'],
+            'email' => [ 'string', 'email', 'max:255'],
+            'password' => [''],
             'phone' => 'numeric|digits_between:10,15',
             'address' => 'string|max:500',
             'bank' => 'string|max:255',

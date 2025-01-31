@@ -10,7 +10,7 @@
       </a>
       @endrole
     </div>
-    <form method="POST" action="" id="bulk-action-form">
+    <form method="POST" action="{{route('salaryslips.send-bulk-action')}}" id="bulk-action-form">
       @csrf
       <div class="table-responsive text-nowrap">
         <table class="table">
@@ -63,9 +63,8 @@
                       </a>
 
                       <a href="{{route('admin.salary-slips.destroy', $salaryslip->id)}}">
-                        <i class="ti ti-edit me-2"></i>
+                        <i class="ti ti-trash me-2"></i>
                       </a>
-
                 </td>
               </tr>
             @empty
@@ -81,12 +80,15 @@
         <button type="submit" name="action" value="generate_pdf" class="btn btn-success">Generate PDFs for Selected</button>
       </div>
       </div>
-
     </form>
   </div>
 </div>
 
+@push('scripts')
+{{-- No scripts will be loaded from the layout --}}
+@endpush
 <script>
+
 // Select or deselect all checkboxes
 document.getElementById('select-all').addEventListener('click', function () {
     const checkboxes = document.querySelectorAll('input[name="selected_salary_slips[]"]');

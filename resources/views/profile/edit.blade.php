@@ -10,8 +10,6 @@
             </div>
             <!-- Password Change Section -->
 
-
-
             <div class="card-body pt-4">
                 <form id="formAccountSettings" method="POST" action="{{ route('profile.update')}}" enctype="multipart/form-data">
                     @csrf

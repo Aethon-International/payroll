@@ -63,7 +63,7 @@
                 </form>
 
                 <a href="{{route('selected.employee.salary-slips', $employee->id)}}">
-                <button class="btn btn-warning">View Slips</button>
+                <button class="btn btn-success">View Slips</button>
                 </a>
 
               </td>

@@ -10,7 +10,7 @@
     <!-- Name -->
     <div class="mt-4">
         <label for="name" class="form-label">Name</label>
-        <input type="text" id="name" name="name" value="{{ old('name')}}" class="form-control"  autofocus autocomplete="first_name" />
+        <input type="text" id="name" name="name"  value="{{ old('name', $employee->name) }}" class="form-control"  value="{{ old('name', auth()->user()->name) }}" autofocusautofocus autocomplete="first_name" />
         @error('name')
         <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
@@ -21,7 +21,7 @@
     <!-- Email -->
     <div class="mt-4">
         <label for="email" class="form-label">Email</label>
-        <input type="email" id="email" name="email"  class="form-control"  />
+        <input type="email" id="email" name="email"  class="form-control"   value="{{ old('email', $employee->email) }}"/>
         @error('email')
         <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
@@ -30,7 +30,7 @@
                     <!-- Password -->
                     <div class="mt-4">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" id="password" name="password"  class="form-control"   />
+                        <input type="password" id="password" name="password"   class="form-control"   />
                         @error('password')
                         <div class="mt-2 text-danger">{{ $message }}</div>
                         @enderror
@@ -39,7 +39,7 @@
     <!-- Phone -->
     <div class="mt-4">
         <label for="phone" class="form-label">Phone</label>
-        <input type="phone" id="phone" name="phone" value="{{ old('phone')}}" class="form-control"  autocomplete="employeename" />
+        <input type="phone" id="phone" name="phone" value="{{$employee->phone}}"  class="form-control"  autocomplete="employeename" />
         @error('phone')
         <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
@@ -48,7 +48,7 @@
     <!-- Address -->
     <div class="mt-4">
         <label for="address" class="form-label">Address</label>
-        <input type="text" id="address" name="address" value="{{ old('address')}}" class="form-control"  autocomplete="employeename" />
+        <input type="text" id="address" name="address" value="{{$employee->address}}"  class="form-control"  autocomplete="employeename" />
         @error('address')
         <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
@@ -57,7 +57,7 @@
         <!-- Bank -->
         <div class="mt-4">
         <label for="bank" class="form-label">Bank Name</label>
-        <input type="text" id="bank" name="bank" value="{{ old('bank')}}" class="form-control"  autocomplete="new-password" />
+        <input type="text" id="bank" name="bank" value="{{$employee->bank}}" class="form-control"  autocomplete="new-password" />
         @error('bank')
         <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
@@ -66,21 +66,20 @@
         <!-- Account No -->
         <div class="mt-4">
         <label for="accountno" class="form-label">Account #</label>
-        <input type="text" id="accountno" name="accountno" value="{{ old('accountno')}}"class="form-control"  autocomplete="new-password" />
+        <input type="text" id="accountno" name="accountno" value="{{$employee->accountno}}" class="form-control"  autocomplete="new-password" />
         @error('accountno')
         <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
     </div>
+
     <!-- Salary -->
     <div class="mt-4">
         <label for="salary" class="form-label">Salary</label>
-        <input type="text" id="salary" name="salary" class="form-control"  value="{{ old('salary')}}" autocomplete="new-password" />
+        <input type="text" id="salary" name="salary" class="form-control"  value="{{$employee->salary}}" autocomplete="new-password" />
         @error('salary')
         <div class="mt-2 text-danger">{{ $message }}</div>
         @enderror
     </div>
-
-
 
       <!-- Submit and Cancel -->
       <div class="pt-4">

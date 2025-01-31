@@ -30,14 +30,14 @@ class SalarySlipController extends Controller
 
     // Fetch the employee and assign to the salary slip
     $employee = User::find($request->employee_id);
-    $salary_slip->employee_id = $employee->id; // Set the employee's foreign key in the salary slip
+    $salary_slip->employee_id = $employee->id ?? " "; // Set the employee's foreign key in the salary slip
 
     // Fetch the payroll period and assign to the salary slip
     $payroll_period = PayrollPeriod::find($request->payroll_period_id);
-    $salary_slip->payroll_period_id = $payroll_period->id; // Set the payroll period's foreign key in the salary slip
+    $salary_slip->payroll_period_id = $payroll_period->id ?? ""; // Set the payroll period's foreign key in the salary slip
 
     // Initialize the base salary
-    $salary_slip->base_salary = $employee->salary;
+    $salary_slip->base_salary = $employee->salary ?? "";
 
     // Initialize net salary to base salary (default)
     $net_salary = $employee->salary;
@@ -77,9 +77,6 @@ class SalarySlipController extends Controller
     // Save the salary slip with all the relations
     $salary_slip->save();
 
-
-
-
     return redirect()->route('admin.salary-slips.index')->with('success', 'Salary Slip created successfully.');
 }
 
@@ -97,7 +94,7 @@ class SalarySlipController extends Controller
         $salaryslip = SalarySlip::find($id);
         $adjustmenttypes = AdjustmentType::all();
         $payrollperiods = PayrollPeriod::all();
-        $employees = User::all();
+        $employees = User::Role('employee')->get();
         return view('salaryslips.edit', compact('employees', 'payrollperiods', 'adjustmenttypes', 'salaryslip'));
 
     }

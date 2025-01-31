@@ -57,6 +57,8 @@ class EmployeeController extends Controller
       $employee=User::find($id);
       $employee->update($request->validated());
 
+
+
       return redirect()->route('employees.index')->with('success', 'Employee Updated successfully!');
     }
 
