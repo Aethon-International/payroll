@@ -68,7 +68,7 @@ Route::delete('payroll-periods/{payroll_period}', [PayrollPeriodController::clas
 
 
 Route::middleware(['auth', 'useractive'])->group(function () {
-    Route::get('employee/salary-slips}', [SalarySlipController::class, 'showEmployeeSalarySlip'])->name('employee.salary-slips');
+    Route::get('employee/salary-slips', [SalarySlipController::class, 'showEmployeeSalarySlip'])->name('employee.salary-slips');
 });
 
 

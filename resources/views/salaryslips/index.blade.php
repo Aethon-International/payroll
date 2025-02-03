@@ -26,7 +26,10 @@
               <th>Days Off Amount</th>
               <th>Bonus</th>
               <th>Net Amount</th>
+              @role('admin')
               <th>Action</th>
+              @endrole
+
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
@@ -55,17 +58,22 @@
                   <span class="fw-medium">{{ $salaryslip->bonus }}</span>
                 </td>
                 <td>
-                  <span class="fw-medium">{{ $salaryslip->net_salary }}</span>s
+                  <span class="fw-medium">{{ $salaryslip->net_salary }}</span>
                 </td>
+                @role('admin')
                 <td>
+
                     <a href="{{route('admin.salary-slips.edit', $salaryslip->id)}}">
                         <i class="ti ti-edit me-2"></i>
                       </a>
 
+
                       <a href="{{route('admin.salary-slips.destroy', $salaryslip->id)}}">
                         <i class="ti ti-trash me-2"></i>
                       </a>
+
                 </td>
+                @endrole
               </tr>
             @empty
               <tr>
@@ -76,7 +84,9 @@
           </tbody>
         </table>
         <div class="m-5 d-flex gap-4">
+            @role('admin')
         <button type="submit" name="action" value="send_email" class="btn btn-primary">Send Emails to Selected</button>
+        @endrole
         <button type="submit" name="action" value="generate_pdf" class="btn btn-success">Generate PDFs for Selected</button>
       </div>
       </div>
