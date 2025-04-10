@@ -63,7 +63,7 @@
                 @role('admin')
                 <td>
 
-                    <a href="{{route('admin.salary-slips.edit', $salaryslip->id)}}">
+                    <a  href="{{route('admin.salary-slips.edit', $salaryslip->id)}}">
                         <i class="ti ti-edit me-2"></i>
                       </a>
 

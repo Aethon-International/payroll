@@ -41,6 +41,9 @@
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{asset('vendor/libs/node-waves/node-waves.css')}}" />
+    <!-- add below table cdn link thats why icon is workign  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
 
     <link rel="stylesheet" href="{{asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
     <link rel="stylesheet" href="{{asset('vendor/libs/typeahead-js/typeahead.css')}}" />
